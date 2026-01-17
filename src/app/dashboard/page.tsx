@@ -163,6 +163,7 @@ export default function DashboardPage() {
                 variant="outline" 
                 size="lg"
                 className="w-full"
+                onClick={() => router.push('/ai-analysis')}
               >
                 {t('dashboard.scanPhoto')}
               </Button>

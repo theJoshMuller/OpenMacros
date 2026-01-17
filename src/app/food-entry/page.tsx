@@ -4,49 +4,51 @@ import * as React from 'react'
 import { useRouter } from 'next/navigation'
 import { FoodSearch } from '@/components/food-entry/FoodSearch'
 import { ManualFoodEntry } from '@/components/food-entry/ManualFoodEntry'
-import { useFoods } from '@/hooks/useFoods'
+import { useDailyLog } from '@/hooks/useDailyLog'
 import type { Food } from '@/types/db'
 
 export default function FoodEntryPage() {
   const router = useRouter()
-  const { searchFoods, createFood } = useFoods()
+  const { addEntry } = useDailyLog()
   const [selectedFood, setSelectedFood] = React.useState<Food | null>(null)
-  const [loading, setLoading] = React.useState(false)
-  const [error, setError] = React.useState<string | null>(null)
 
-  const handleFoodSelect = async (food: Food) => {
-    setLoading(true)
-    setError(null)
-
-    try {
-      setSelectedFood(food)
-    } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to load food'
-      setError(errorMessage)
-    } finally {
-      setLoading(false)
-    }
+  const handleFoodSelect = (food: Food) => {
+    setSelectedFood(food)
   }
 
-  const handleSaveToLibrary = async () => {
-    if (!selectedFood) return
-
-    setLoading(true)
-    setError(null)
-
+  const handleAdd = async (entry: {
+    foodId: string
+    quantity: number
+    calories: number
+    protein: number
+    carbs: number
+    fat: number
+  }) => {
     try {
-      await createFood(selectedFood)
+      const today = new Date().toISOString().split('T')[0]
+
+      await addEntry(today, {
+        type: 'food',
+        itemId: entry.foodId,
+        quantity: entry.quantity,
+        calories: entry.calories,
+        protein: entry.protein,
+        carbs: entry.carbs,
+        fat: entry.fat,
+      })
+
       router.push('/dashboard')
     } catch (err) {
-      const errorMessage = err instanceof Error ? err.message : 'Failed to save food'
-      setError(errorMessage)
-    } finally {
-      setLoading(false)
+      console.error('Failed to add to log:', err)
     }
   }
 
   const handleCancel = () => {
-    router.back()
+    if (selectedFood) {
+      setSelectedFood(null)
+    } else {
+      router.push('/dashboard')
+    }
   }
 
   return (
@@ -62,22 +64,14 @@ export default function FoodEntryPage() {
           </button>
         </div>
 
-        {error && (
-          <div className="p-4 rounded-md bg-red-50 text-red-800 text-sm">
-            {error}
-          </div>
-        )}
-
         {!selectedFood ? (
           <FoodSearch
-            onFoodSelect={handleFoodSelect}
-            loading={loading}
+            onSelect={handleFoodSelect}
           />
         ) : (
           <ManualFoodEntry
-            food={selectedFood}
-            onSave={handleSaveToLibrary}
-            onCancel={() => setSelectedFood(null)}
+            selectedFood={selectedFood}
+            onAdd={handleAdd}
           />
         )}
       </div>
