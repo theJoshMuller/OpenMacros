@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 
 interface PersonalInfoFormProps {
+  stepIndex?: number
   onChange?: (data: PersonalInfoData) => void
 }
 
@@ -17,7 +18,7 @@ export interface PersonalInfoData {
   gender: 'male' | 'female' | ''
 }
 
-export function PersonalInfoForm({ onChange }: PersonalInfoFormProps) {
+export function PersonalInfoForm({ stepIndex = 0, onChange }: PersonalInfoFormProps) {
   const { t } = useTranslation()
   const { registerValidate, unregisterValidate } = useOnboarding()
   
@@ -77,11 +78,11 @@ export function PersonalInfoForm({ onChange }: PersonalInfoFormProps) {
   }
 
   React.useEffect(() => {
-    registerValidate(0, validate)
+    registerValidate(stepIndex, validate)
     return () => {
-      unregisterValidate(0)
+      unregisterValidate(stepIndex)
     }
-  }, [registerValidate, unregisterValidate, formData])
+  }, [registerValidate, unregisterValidate, stepIndex])
 
   const handleInputChange = (field: keyof PersonalInfoData) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = (e.target.type === 'number' 
@@ -95,7 +96,11 @@ export function PersonalInfoForm({ onChange }: PersonalInfoFormProps) {
       setErrors(prev => ({ ...prev, [field]: error || undefined }) as Partial<Record<keyof PersonalInfoData, string>>)
     }
 
-    onChange?.({ ...formData, [field]: value } as PersonalInfoData)
+    setFormData(prev => {
+      const updated = { ...prev, [field]: value }
+      onChange?.(updated)
+      return updated
+    })
   }
 
   const handleBlur = (field: keyof PersonalInfoData) => () => {
@@ -105,10 +110,13 @@ export function PersonalInfoForm({ onChange }: PersonalInfoFormProps) {
   }
 
   const handleGenderSelect = (gender: 'male' | 'female') => {
-    setFormData(prev => ({ ...prev, gender }))
-    setTouched(prev => ({ ...prev, gender: true }))
-    setErrors(prev => ({ ...prev, gender: undefined }))
-    onChange?.({ ...formData, gender })
+    setFormData(prev => {
+      const updated = { ...prev, gender }
+      setTouched(touched => ({ ...touched, gender: true }))
+      setErrors(errors => ({ ...errors, gender: undefined }))
+      onChange?.(updated)
+      return updated
+    })
   }
 
   return (
@@ -200,12 +208,13 @@ export function PersonalInfoForm({ onChange }: PersonalInfoFormProps) {
         </div>
 
         <div className="space-y-2">
-          <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+          <label id="gender-label" className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
             {t('onboarding.gender')}
           </label>
           <div
             role="radiogroup"
-            aria-label={t('onboarding.gender')}
+            aria-labelledby="gender-label"
+            aria-describedby={errors.gender ? 'gender-error' : undefined}
             className="grid grid-cols-2 gap-3"
           >
             <button
@@ -240,7 +249,7 @@ export function PersonalInfoForm({ onChange }: PersonalInfoFormProps) {
             </button>
           </div>
           {errors.gender && (
-            <p className="text-sm text-destructive" role="alert">
+            <p id="gender-error" className="text-sm text-destructive" role="alert">
               {errors.gender}
             </p>
           )}
