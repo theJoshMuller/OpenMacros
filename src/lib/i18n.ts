@@ -25,6 +25,14 @@ const resources = {
         error: 'Error',
         retry: 'Retry',
       },
+      validation: {
+        required: 'This field is required',
+        numberRequired: 'Please enter a valid number',
+        ageRange: 'Age must be between 18 and 100',
+        weightRange: 'Weight must be between 30 and 200 kg',
+        heightRange: 'Height must be between 100 and 250 cm',
+        genderRequired: 'Please select a gender',
+      },
       onboarding: {
         welcome: 'Welcome to OpenMacros',
         welcomeSubtitle: 'Your personal macro and calorie tracker',
@@ -139,6 +147,14 @@ const resources = {
         loading: 'Cargando...',
         error: 'Error',
         retry: 'Reintentar',
+      },
+      validation: {
+        required: 'Este campo es obligatorio',
+        numberRequired: 'Por favor ingrese un número válido',
+        ageRange: 'La edad debe estar entre 18 y 100',
+        weightRange: 'El peso debe estar entre 30 y 200 kg',
+        heightRange: 'La altura debe estar entre 100 y 250 cm',
+        genderRequired: 'Por favor seleccione un género',
       },
       onboarding: {
         welcome: 'Bienvenido a OpenMacros',
