@@ -6,6 +6,7 @@ const resources = {
     translation: {
       common: {
         appName: 'OpenMacros',
+        name: 'Name',
         calories: 'Calories',
         protein: 'Protein',
         carbs: 'Carbs',
@@ -69,6 +70,12 @@ const resources = {
         reviewTargets: 'Review Your Targets',
         calculatedTDEE: 'Your calculated daily calorie needs',
         yourTargets: 'Your daily targets',
+        bmr: 'Basal Metabolic Rate',
+        tdee: 'Total Daily Energy Expenditure',
+        calories: 'Calories',
+        protein: 'Protein',
+        carbs: 'Carbs',
+        fat: 'Fat',
         editTargets: 'Edit Targets',
         continue: 'Continue',
         apiKey: 'OpenRouter API Key',
@@ -140,6 +147,7 @@ const resources = {
     translation: {
       common: {
         appName: 'OpenMacros',
+        name: 'Nombre',
         calories: 'Calorías',
         protein: 'Proteína',
         carbs: 'Carbohidratos',
@@ -203,6 +211,12 @@ const resources = {
         reviewTargets: 'Revisa Tus Metas',
         calculatedTDEE: 'Tus necesidades calóricas diarias calculadas',
         yourTargets: 'Tus metas diarias',
+        bmr: 'Tasa Metabólica Basal',
+        tdee: 'Gasto Energético Diario Total',
+        calories: 'Calorías',
+        protein: 'Proteína',
+        carbs: 'Carbohidratos',
+        fat: 'Grasa',
         editTargets: 'Editar Metas',
         continue: 'Continuar',
         apiKey: 'API Key de OpenRouter',

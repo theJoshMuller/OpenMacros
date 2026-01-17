@@ -85,19 +85,16 @@ export function PersonalInfoForm({ stepIndex = 0, onChange }: PersonalInfoFormPr
   }, [registerValidate, unregisterValidate, stepIndex])
 
   const handleInputChange = (field: keyof PersonalInfoData) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = (e.target.type === 'number' 
+    const value = (e.target.type === 'number'
       ? (e.target.value === '' ? '' : Number(e.target.value))
       : e.target.value) as PersonalInfoData[keyof PersonalInfoData]
 
-    setFormData(prev => ({ ...prev, [field]: value }))
-    
-    if (touched[field]) {
-      const error = validateField(field, value)
-      setErrors(prev => ({ ...prev, [field]: error || undefined }) as Partial<Record<keyof PersonalInfoData, string>>)
-    }
-
     setFormData(prev => {
       const updated = { ...prev, [field]: value }
+      if (touched[field]) {
+        const error = validateField(field, value)
+        setErrors(errors => ({ ...errors, [field]: error || undefined }) as Partial<Record<keyof PersonalInfoData, string>>)
+      }
       onChange?.(updated)
       return updated
     })
