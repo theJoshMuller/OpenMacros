@@ -101,11 +101,13 @@ const resources = {
       },
       foodEntry: {
         searchFoods: 'Search foods...',
+        searchPlaceholder: 'Search foods...',
         servingSize: 'Serving Size',
         quantity: 'Quantity',
         nutritionInfo: 'Nutrition Information',
         addToLog: 'Add to Log',
         saveToLibrary: 'Save to Library',
+        baseServing: 'Base serving',
       },
       aiAnalysis: {
         title: 'Scan Food Photo',
@@ -243,11 +245,13 @@ const resources = {
       },
       foodEntry: {
         searchFoods: 'Buscar comidas...',
+        searchPlaceholder: 'Buscar comidas...',
         servingSize: 'Tamaño de Porción',
         quantity: 'Cantidad',
         nutritionInfo: 'Información Nutricional',
         addToLog: 'Añadir al Registro',
         saveToLibrary: 'Guardar en Biblioteca',
+        baseServing: 'Porción base',
       },
       aiAnalysis: {
         title: 'Escanear Foto',

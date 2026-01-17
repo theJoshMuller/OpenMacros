@@ -10,9 +10,6 @@ import { AnalysisResult, AnalysisResultData } from '@/components/ai-analysis/Ana
 import { analyzeFood } from '@/lib/api/openRouter'
 import { useUserProfile } from '@/hooks/useUserProfile'
 import { useDailyLog } from '@/hooks/useDailyLog'
-import { db } from '@/lib/db/schema'
-import { generateUUID, generateDeviceId } from '@/lib/utils/uuid'
-import { Food } from '@/types/db'
 
 type Step = 'camera' | 'analyzing' | 'result' | 'error'
 
@@ -60,35 +57,8 @@ export default function AIAnalysisPage() {
     }
   }
 
-  const handleSaveToLibrary = async (data: AnalysisResultData) => {
-    try {
-      const deviceId = generateDeviceId()
-      const now = Date.now()
-
-      const food: Omit<Food, 'id'> = {
-        name: { en: data.name, es: data.name },
-        description: { en: data.description, es: data.description },
-        servingSize: data.servingSize,
-        servingUnit: { en: data.servingUnit, es: data.servingUnit },
-        calories: data.calories,
-        protein: data.protein,
-        carbs: data.carbs,
-        fat: data.fat,
-        fiber: data.fiber,
-        sugar: data.sugar,
-        deviceId,
-        createdAt: now,
-        updatedAt: now,
-      }
-
-      const id = generateUUID()
-      await db.foods.add({ ...food, id })
-
-      router.push('/dashboard')
-    } catch (err) {
-      console.error('Failed to save to library:', err)
-      setError(err instanceof Error ? err.message : 'Failed to save')
-    }
+  const handleSaveToLibrary = (data: AnalysisResultData) => {
+    router.push('/dashboard')
   }
 
   const handleAddToLog = async (logData: {

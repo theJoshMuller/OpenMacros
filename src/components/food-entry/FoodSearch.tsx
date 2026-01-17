@@ -71,7 +71,7 @@ export function FoodSearch({ onSelect }: FoodSearchProps) {
                     {food.description[i18n.language as 'en' | 'es']}
                   </div>
                   <div className="text-xs text-muted-foreground mt-1">
-                    {food.calories} {t('nutrition.calories')}
+                    {food.calories} {t('common.calories')}
                   </div>
                 </button>
               </li>

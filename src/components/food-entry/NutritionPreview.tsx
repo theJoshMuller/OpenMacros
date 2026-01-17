@@ -11,30 +11,30 @@ export function NutritionPreview({ nutrition }: NutritionPreviewProps) {
   return (
     <div className="space-y-2 text-sm">
       <div className="flex justify-between">
-        <span className="text-muted-foreground">{t('nutrition.calories')}</span>
+        <span className="text-muted-foreground">{t('common.calories')}</span>
         <span className="font-medium">{nutrition.calories}</span>
       </div>
       <div className="flex justify-between">
-        <span className="text-muted-foreground">{t('nutrition.protein')}</span>
+        <span className="text-muted-foreground">{t('common.protein')}</span>
         <span className="font-medium">{nutrition.protein}g</span>
       </div>
       <div className="flex justify-between">
-        <span className="text-muted-foreground">{t('nutrition.carbs')}</span>
+        <span className="text-muted-foreground">{t('common.carbs')}</span>
         <span className="font-medium">{nutrition.carbs}g</span>
       </div>
       <div className="flex justify-between">
-        <span className="text-muted-foreground">{t('nutrition.fat')}</span>
+        <span className="text-muted-foreground">{t('common.fat')}</span>
         <span className="font-medium">{nutrition.fat}g</span>
       </div>
       {nutrition.fiber !== undefined && (
         <div className="flex justify-between">
-          <span className="text-muted-foreground">{t('nutrition.fiber')}</span>
+          <span className="text-muted-foreground">{t('common.fiber')}</span>
           <span className="font-medium">{nutrition.fiber}g</span>
         </div>
       )}
       {nutrition.sugar !== undefined && (
         <div className="flex justify-between">
-          <span className="text-muted-foreground">{t('nutrition.sugar')}</span>
+          <span className="text-muted-foreground">{t('common.sugar')}</span>
           <span className="font-medium">{nutrition.sugar}g</span>
         </div>
       )}
