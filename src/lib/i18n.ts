@@ -7,6 +7,7 @@ const resources = {
       common: {
         appName: 'OpenMacros',
         name: 'Name',
+        description: 'Description',
         calories: 'Calories',
         protein: 'Protein',
         carbs: 'Carbs',
@@ -148,6 +149,7 @@ const resources = {
       common: {
         appName: 'OpenMacros',
         name: 'Nombre',
+        description: 'Descripción',
         calories: 'Calorías',
         protein: 'Proteína',
         carbs: 'Carbohidratos',
