@@ -104,26 +104,26 @@ export function TargetReview({
 
     setErrors(newErrors)
     return isValid
-  }, [targets])
+  }, [targets, validateField])
 
   React.useEffect(() => {
     registerValidate(stepIndex, validate)
     return () => {
       unregisterValidate(stepIndex)
     }
-  }, [registerValidate, unregisterValidate, stepIndex])
+  }, [registerValidate, unregisterValidate, stepIndex, validate])
 
   const handleInputChange = (field: keyof TargetData) => (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value === '' ? 0 : Number(e.target.value)
 
-    setTargets(prev => ({ ...prev, [field]: value }))
+    const updated = { ...targets, [field]: value }
+    setTargets(updated)
 
     if (touched[field]) {
       const error = validateField(field, value)
       setErrors(prev => ({ ...prev, [field]: error || undefined }))
     }
 
-    const updated = { ...targets, [field]: value }
     onChange?.(updated)
   }
 

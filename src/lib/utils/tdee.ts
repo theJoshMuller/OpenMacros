@@ -42,11 +42,12 @@ export function calculateGoalCalories(tdee: number, goal: TDEEInput['goal']): nu
 
 export function calculateMacroTargets(
   calories: number,
-  goal: TDEEInput['goal']
+  goal: TDEEInput['goal'],
+  weight: number
 ): { protein: number; carbs: number; fat: number } {
   const proteinPerKg = goal === 'gain' ? 2.2 : 1.8;
 
-  const protein = Math.round(proteinPerKg * 80);
+  const protein = Math.round(proteinPerKg * weight);
   const fat = Math.round((calories * 0.3) / 9);
   const remainingCalories = calories - protein * 4 - fat * 9;
   const carbs = Math.round(remainingCalories / 4);
@@ -62,7 +63,7 @@ export function calculateTDEE(input: TDEEInput): TDEEResult {
   const bmr = calculateBMR(input);
   const tdee = calculateTDEEFromBMR(bmr, input.activityLevel);
   const targetCalories = calculateGoalCalories(tdee, input.goal);
-  const macros = calculateMacroTargets(targetCalories, input.goal);
+  const macros = calculateMacroTargets(targetCalories, input.goal, input.weight);
 
   return {
     bmr,
