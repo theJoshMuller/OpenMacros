@@ -26,7 +26,7 @@ export function calculateBMR(input: TDEEInput): number {
   }
 }
 
-export function calculateTDEE(bmr: number, activityLevel: number): number {
+export function calculateTDEEFromBMR(bmr: number, activityLevel: number): number {
   return Math.round(bmr * activityLevel);
 }
 
@@ -60,7 +60,7 @@ export function calculateMacroTargets(
 
 export function calculateTDEE(input: TDEEInput): TDEEResult {
   const bmr = calculateBMR(input);
-  const tdee = calculateTDEE(bmr, input.activityLevel);
+  const tdee = calculateTDEEFromBMR(bmr, input.activityLevel);
   const targetCalories = calculateGoalCalories(tdee, input.goal);
   const macros = calculateMacroTargets(targetCalories, input.goal);
 
