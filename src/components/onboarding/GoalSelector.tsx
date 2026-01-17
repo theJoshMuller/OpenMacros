@@ -12,6 +12,7 @@ interface GoalSelectorProps {
 
 export interface GoalData {
   goal: string | ''
+  multiplier: number
 }
 
 export interface GoalOption {
@@ -32,7 +33,8 @@ export function GoalSelector({ stepIndex = 0, onChange }: GoalSelectorProps) {
   const { registerValidate, unregisterValidate } = useOnboarding()
   
   const [selectedGoal, setSelectedGoal] = React.useState<GoalData>({
-    goal: ''
+    goal: '',
+    multiplier: 0
   })
   
   const [error, setError] = React.useState<string | null>(null)
@@ -55,7 +57,8 @@ export function GoalSelector({ stepIndex = 0, onChange }: GoalSelectorProps) {
   }, [registerValidate, unregisterValidate, stepIndex, validate])
 
   const handleSelect = (value: string) => {
-    const updated = { goal: value }
+    const selectedGoalOption = GOALS.find(g => g.value === value)
+    const updated = { goal: value, multiplier: selectedGoalOption?.multiplier ?? 0 }
     setSelectedGoal(updated)
     setTouched(true)
     setError(null)
