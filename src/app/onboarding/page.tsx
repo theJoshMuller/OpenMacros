@@ -24,14 +24,12 @@ export default function OnboardingPage() {
     goal: GoalData
     targets: TargetData
     apiKey: ApiKeyData
-    language: 'en' | 'es'
   }>({
     personalInfo: { age: '', weight: '', height: '', gender: '' },
     activityLevel: { activityLevel: '' },
     goal: { goal: '', multiplier: 0 },
     targets: { calories: 0, protein: 0, carbs: 0, fat: 0 },
-    apiKey: { apiKey: '' },
-    language: 'en'
+    apiKey: { apiKey: '' }
   })
 
   const [isCheckingProfile, setIsCheckingProfile] = React.useState(true)
@@ -102,7 +100,7 @@ export default function OnboardingPage() {
       localStorage.setItem('openmacros-language', language)
 
       await createUserProfile({
-        name: 'User',
+        name: 'OpenMacros User',
         targetCalories: targets.calories,
         targetProtein: targets.protein,
         targetCarbs: targets.carbs,
