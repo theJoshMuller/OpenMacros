@@ -88,6 +88,8 @@ const resources = {
         total: 'Total',
         remaining: 'Remaining',
         over: 'Over',
+        profileNotFound: 'Profile not found. Please complete onboarding.',
+        error: 'Failed to load dashboard data.',
       },
       foodEntry: {
         searchFoods: 'Search foods...',
@@ -220,6 +222,8 @@ const resources = {
         total: 'Total',
         remaining: 'Restante',
         over: 'Sobrepasa',
+        profileNotFound: 'Perfil no encontrado. Por favor completa el registro.',
+        error: 'Error al cargar los datos del panel.',
       },
       foodEntry: {
         searchFoods: 'Buscar comidas...',
